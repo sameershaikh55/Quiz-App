@@ -38,11 +38,11 @@ jobs:
 
 
           - name: Creating Build
-            run: yarn build
+            run: sudo npm run build
 
 
           - name: Installing Surge
-            run: npm install -g surge
+            run: sudo npm install --global surge
 
 
           - name: Deploying on Surge
