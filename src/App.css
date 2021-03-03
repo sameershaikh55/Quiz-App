@@ -7,7 +7,13 @@
 	font-family: "Poppins", sans-serif;
 }
 
+.khTbTK {
+	margin-top: 1rem;
+	margin-bottom: 0.8rem;
+}
+
 .MuiFormControl-root {
+	margin-top: 2rem;
 	width: 140px;
 }
 
@@ -17,4 +23,17 @@
 
 .bDRYnt {
 	padding: 2rem 1.5rem 1.8rem 1rem !important;
+}
+
+.MuiInputBase-root {
+	background: #ffbe74cb;
+}
+
+.MuiButton-contained {
+	background: rgb(54, 32, 11) !important;
+	color: white !important;
+}
+
+.MuiButton-contained:disabled {
+	background-color: rgb(54, 32, 11, 0.4) !important;
 }

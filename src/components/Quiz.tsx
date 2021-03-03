@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // IMPORTING STYLED COMPONENTS
 import {
@@ -13,6 +13,9 @@ import {
 
 import Button from "@material-ui/core/Button";
 
+// IMPORTING LOADER
+import Loader from "./Images/loader.gif";
+
 // IMPORTING TYPES
 import { QuestionType, quizProps } from "../Types/types";
 
@@ -25,9 +28,7 @@ const Quiz: React.FC<quizProps> = ({ QType, TQuestions }) => {
 	const [inpAnswer, setInpAnswer] = useState<string>("");
 	let [questionNumber, setQuestionNumber] = useState<number>(0);
 	let [score, setScore] = useState<number>(0);
-	const [results, setResults] = useState(false);
-
-	const radioBtn = useRef<HTMLInputElement>(null);
+	const [results, setResults] = useState<boolean>(false);
 
 	useEffect(() => {
 		const FilteredData = async () => {
@@ -37,9 +38,14 @@ const Quiz: React.FC<quizProps> = ({ QType, TQuestions }) => {
 		FilteredData();
 	}, [QType, TQuestions]);
 
-	if (!renderData.length) return <Container>Loading...</Container>;
+	if (!renderData.length)
+		return (
+			<Container>
+				<img src={Loader} alt="" height={300} />
+			</Container>
+		);
 
-	const submitEvent = (event: any) => {
+	const submitEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 		let answer = renderData[questionNumber].answer;
 
@@ -60,11 +66,11 @@ const Quiz: React.FC<quizProps> = ({ QType, TQuestions }) => {
 		setInpAnswer("");
 	};
 
-	const changeEvent = (event: any) => {
+	const changeEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setInpAnswer(event.target.value);
 	};
 
-	let questionData = renderData[questionNumber];
+	let questionData: QuestionType = renderData[questionNumber];
 
 	return (
 		<>
@@ -75,10 +81,12 @@ const Quiz: React.FC<quizProps> = ({ QType, TQuestions }) => {
 					<InnerContainer>
 						<QuizzHeading>QUIZ</QuizzHeading>
 						<QuestionContainer>
-							<Question> {questionData.question} </Question>
+							<Question>
+								Q.{questionNumber + 1}: {questionData.question}
+							</Question>
 							<form>
-								<OptionsContainer onChange={changeEvent}>
-									{questionData.options.map((preVal, index) => {
+								<OptionsContainer>
+									{questionData.options.map((preVal: string, index: number) => {
 										return (
 											<Option key={index}>
 												<input
@@ -86,7 +94,8 @@ const Quiz: React.FC<quizProps> = ({ QType, TQuestions }) => {
 													name="option"
 													id={preVal}
 													value={preVal}
-													ref={radioBtn}
+													checked={inpAnswer === preVal}
+													onChange={changeEvent}
 												/>
 												<label htmlFor={preVal}>{preVal}</label>
 											</Option>
@@ -96,7 +105,7 @@ const Quiz: React.FC<quizProps> = ({ QType, TQuestions }) => {
 								<Button
 									disabled={inpAnswer === "" ? true : false}
 									variant="contained"
-									style={{ background: "#ced373" }}
+									style={{ background: "#36200b", color: "white" }}
 									onClick={submitEvent}
 								>
 									Submit

@@ -4,6 +4,8 @@ import {
 	InnerContainer,
 	QuestionContainer,
 	QuizzHeading,
+	Results,
+	RightAns,
 } from "./QuizStyle";
 
 import { modalProps } from "../Types/types";
@@ -20,10 +22,18 @@ const ModalF: React.FC<modalProps> = ({ Score, RenderData }) => {
 			<InnerContainer>
 				<QuizzHeading>Quiz</QuizzHeading>
 				<QuestionContainer>
-					<h2>
-						Your Score {Score} out of {RenderData}
-					</h2>
-					<Button onClick={ContextCame}>Play Again</Button>
+					<Results>
+						Your Score&nbsp;
+						<RightAns>
+							{Score}/{RenderData}
+						</RightAns>
+					</Results>
+					<Button
+						style={{ background: "#36200b", color: "white" }}
+						onClick={ContextCame}
+					>
+						Play Again
+					</Button>
 				</QuestionContainer>
 			</InnerContainer>
 		</Container>

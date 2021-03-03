@@ -8,9 +8,6 @@ export const QuizData = async (
 	TQuestions: any,
 	QType: any
 ): Promise<QuestionType[]> => {
-	console.log(TQuestions);
-	console.log(QType);
-
 	const data = await fetch(
 		`https://opentdb.com/api.php?amount=${TQuestions}&diffculty=${QType}&type=multiple`
 	);

@@ -98,7 +98,7 @@ const SelectData: React.FC = () => {
 						<StartBtnContainer>
 							<Button
 								variant="contained"
-								style={{ background: "#ced373" }}
+								style={{ background: "#36200b", color: "white" }}
 								onClick={startEvent}
 							>
 								Start
